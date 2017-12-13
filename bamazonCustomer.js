@@ -14,8 +14,40 @@ let connection = mysql.createConnection({
 connection.connect(function(err) {
   if (err) throw err;
   console.log("connected as id " + connection.threadId);
-  listItems();
+  welcome();
 });
+
+function welcome() {
+  inquirer.prompt([
+    {
+      message: "Would you like to buy something today? ('yes' or 'no')",
+      name: "welcome"
+    }
+  ]).then(function(result) {
+    if (result.welcome === "yes") {
+      listItems();
+    } else {
+      console.log("Thank you!");
+      connection.end();
+    }
+  });
+}
+
+function welcomeAgain() {
+  inquirer.prompt([
+    {
+      message: "Would you like to buy something else today? ('yes' or 'no')",
+      name: "welcome"
+    }
+  ]).then(function(result) {
+    if (result.welcome === "yes") {
+      listItems();
+    } else {
+      console.log("Thank you!");
+      connection.end();
+    }
+  });
+}
 
 function listItems() {
   connection.query("SELECT * FROM products", function(err, data) {
@@ -41,30 +73,35 @@ function whatToBuy() {
       message: "How many would you like to buy?"
     }
   ]).then(function(result) {
-    console.log("IDNum", result.idNum);
-    console.log("amount", result.amount);
     buyItem(result.idNum, result.amount);
   });
   }
 
 function buyItem(id, amount) {
-  connection.query("SELECT * FROM products", function(err, data){
+  connection.query("SELECT * FROM products", function(err, data) {
     if (err) throw err;
-    newStock = data[id - 1].stock_quantity - amount;
-    console.log("newStock", newStock);
-    connection.query("UPDATE products SET ? WHERE ?",
-    [
-      {
-        stock_quantity: newStock
-      },
-      {
-        id: id
-      }
-    ],
-    function(err, result){
-      if (err) throw err;
-      console.log("Thank you for your purchase");
-      listItems();
-    });
+    if (id > data.length) {
+      console.log("I'm sorry, we don't seem to have that item.");
+      welcome();
+    } else if (data[id -1].stock_quantity < amount) {
+      console.log("We don't have that many in stock. Please check back later.")
+      welcomeAgain();
+    } else {
+      newStock = data[id - 1].stock_quantity - amount;
+      connection.query("UPDATE products SET ? WHERE ?",
+      [
+        {
+          stock_quantity: newStock
+        },
+        {
+          id: id
+        }
+      ],
+      function(err, result) {
+        if (err) throw err;
+        console.log("Thank you for your purchase");
+        welcomeAgain();
+      });
+    }
   });
 }
