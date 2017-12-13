@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/masonjterry/bamazon#readme",
   "dependencies": {
-    "inquirer": "^4.0.1"
+    "inquirer": "^4.0.1",
+    "mysql": "^2.15.0"
   }
 }
