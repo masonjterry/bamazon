@@ -1,0 +1,22 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "amazon-like node app",
+  "main": "bamazonCustomer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/masonjterry/bamazon.git"
+  },
+  "author": "Mason Terry",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/masonjterry/bamazon/issues"
+  },
+  "homepage": "https://github.com/masonjterry/bamazon#readme",
+  "dependencies": {
+    "inquirer": "^4.0.1"
+  }
+}
