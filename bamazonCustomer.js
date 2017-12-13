@@ -1,6 +1,7 @@
 let inquirer = require("inquirer");
 let mysql = require("mysql");
 let colors = require("colors");
+let newStock = 0;
 
 let connection = mysql.createConnection({
   host: "localhost",
@@ -47,15 +48,20 @@ function whatToBuy() {
   }
 
 function buyItem(id, amount) {
+  connection.query("SELECT * FROM products", function(err, data){
+    if (err) throw err;
+    newStock = data[id - 1].stock_quantity - amount;
+    console.log("newStock", newStock);
+  });
   connection.query("UPDATE products SET ? WHERE ?",
   [
     {
-    stock_quantity: amount
-  },
-  {
-    id: id
-  }
-],
+      stock_quantity: newStock
+    },
+    {
+      id: id
+    }
+  ],
   function(err, result){
     if (err) throw err;
     console.log("Thank you for your purchase");
