@@ -41,13 +41,25 @@ function whatToBuy() {
     }
   ]).then(function(result) {
     console.log("IDNum", result.idNum);
-    console.log("ammount", result.amount);
+    console.log("amount", result.amount);
     buyItem(result.idNum, result.amount);
   });
   }
 
 function buyItem(id, amount) {
-  connection.query("")
+  connection.query("UPDATE products SET ? WHERE ?",
+  [
+    {
+    stock_quantity: amount
+  },
+  {
+    id: id
+  }
+],
+  function(err, result){
+    if (err) throw err;
+    console.log("Thank you for your purchase");
+  });
   whatToBuy();
   connection.end();
 }
