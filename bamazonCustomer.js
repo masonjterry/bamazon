@@ -52,20 +52,19 @@ function buyItem(id, amount) {
     if (err) throw err;
     newStock = data[id - 1].stock_quantity - amount;
     console.log("newStock", newStock);
+    connection.query("UPDATE products SET ? WHERE ?",
+    [
+      {
+        stock_quantity: newStock
+      },
+      {
+        id: id
+      }
+    ],
+    function(err, result){
+      if (err) throw err;
+      console.log("Thank you for your purchase");
+      listItems();
+    });
   });
-  connection.query("UPDATE products SET ? WHERE ?",
-  [
-    {
-      stock_quantity: newStock
-    },
-    {
-      id: id
-    }
-  ],
-  function(err, result){
-    if (err) throw err;
-    console.log("Thank you for your purchase");
-  });
-  whatToBuy();
-  connection.end();
 }
