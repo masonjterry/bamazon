@@ -137,18 +137,21 @@ function addProduct() {
     {
       message: "How many items would you like to put in stock?",
       name: "stock_quantity"
-    },
-
+    }
   ]).then(function(ans) {
     console.log(ans.product_name);
+    let ansProduct_name = ans.product_name;
     console.log(ans.department_name);
+    let ansDepartment_name = ans.department_name;
     console.log(ans.price);
+    let ansPrice = parseInt(ans.price);
     console.log(ans.stock_quantity);
-    // connection.query("INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES ?;",
-    // [ans.product_name, ans.department_name, ans.price, ans.stock_quantity],
-    //  function(err, data) {
-    //   console.log("Product Added!");
-    //   moreWork();
-    // });
+    let ansStock_quantity = parseInt(ans.stock_quantity);
+    connection.query("INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES (?);",
+    [ans.product_name, ans.department_name, ans.price, ans.stock_quantity],
+     function(err, data) {
+      console.log("Product Added!");
+      moreWork();
+    });
   });
 }
