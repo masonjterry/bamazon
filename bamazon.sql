@@ -19,4 +19,4 @@ SELECT * FROM products;
 UPDATE products SET product_name = "lawn chair", department_name = "furniture", price = 20, stock_quantity = 20 WHERE id = 13;
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-VALUES (product_name = "shoes", department_name = "clothing", price = 30, stock_quantity = 10);
+VALUES ("shoes", "clothing", 30, 10);

@@ -116,11 +116,6 @@ function addInventory() {
 
 function addProduct() {
   console.log("addProduct is working");
-  // add id
-  // what product would you like to add (name)
-  // what is the department_name
-  // what is the price
-  // how many items do you want to add
   inquirer.prompt([
     {
       message: "What is the name of the product you would like to add?",
@@ -139,15 +134,15 @@ function addProduct() {
       name: "stock_quantity"
     }
   ]).then(function(ans) {
-    console.log(ans.product_name);
     let ansProduct_name = ans.product_name;
-    console.log(ans.department_name);
+    console.log(ansProduct_name);
     let ansDepartment_name = ans.department_name;
-    console.log(ans.price);
+    console.log(ansDepartment_name);
     let ansPrice = parseInt(ans.price);
-    console.log(ans.stock_quantity);
+    console.log(ansPrice);
     let ansStock_quantity = parseInt(ans.stock_quantity);
-    connection.query("INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES (?);",
+    console.log(ansStock_quantity);
+    connection.query("INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES (?, ?, ?, ?);",
     [ans.product_name, ans.department_name, ans.price, ans.stock_quantity],
      function(err, data) {
       console.log("Product Added!");
