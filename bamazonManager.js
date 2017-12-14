@@ -133,14 +133,6 @@ function addProduct() {
       name: "stock_quantity"
     }
   ]).then(function(ans) {
-    let ansProduct_name = ans.product_name;
-    console.log(ansProduct_name);
-    let ansDepartment_name = ans.department_name;
-    console.log(ansDepartment_name);
-    let ansPrice = parseInt(ans.price);
-    console.log(ansPrice);
-    let ansStock_quantity = parseInt(ans.stock_quantity);
-    console.log(ansStock_quantity);
     connection.query("INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES (?, ?, ?, ?);",
     [ans.product_name, ans.department_name, ans.price, ans.stock_quantity],
      function(err, data) {
