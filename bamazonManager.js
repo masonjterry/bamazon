@@ -114,7 +114,6 @@ function addInventory() {
 }
 
 function addProduct() {
-  console.log("addProduct is working");
   inquirer.prompt([
     {
       message: "What is the name of the product you would like to add?",
