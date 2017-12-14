@@ -16,7 +16,7 @@ VALUES ("laptop", "electronics", 1000, 20), ("tv", "electronics", 600, 10), ("co
 
 SELECT * FROM products;
 
-UPDATE products SET product_name = "socks", department_name = "clothing", price = 10, stock_quantity = 20 WHERE id = 12;
+UPDATE products SET product_name = "lawn chair", department_name = "furniture", price = 20, stock_quantity = 20 WHERE id = 13;
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
 VALUES (product_name = "shoes", department_name = "clothing", price = 30, stock_quantity = 10);
