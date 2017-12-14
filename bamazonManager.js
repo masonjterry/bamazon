@@ -57,6 +57,7 @@ function moreWork() {
     if (ans.moreWork === "yes") {
       menuOptions();
     } else {
+      console.log("Thank You!");
       connection.end();
     }
   });
@@ -90,10 +91,29 @@ function lowInventory() {
 }
 
 function addInventory() {
-  console.log("addInventory is working");
-  // what product would you like to add more of
-  // add more of what they type to the item they selected
-  menuOptions();
+  connection.query("SELECT stock_quantity FROM products", function(err, data) {
+    inquirer.prompt([
+      {
+        message: "What is the product id of the product you would like to add to?",
+        name: "productID"
+      },
+      {
+        message: "How many would would you like to add?",
+        name: "amount"
+      }
+    ]).then(function(ans) {
+      console.log(ans.productID);
+      console.log(ans.amount);
+        let stock = parseInt(data[ans.productID - 1].stock_quantity) + parseInt(ans.amount);
+        connection.query("UPDATE products SET stock_quantity = ? WHERE id = ?",
+        //stock += ans.amount;
+        [stock, ans.productID],
+      function(err, data) {
+        console.log("Stock Added!");
+        menuOptions();
+      });
+    });
+  });
 }
 
 function addProduct() {
