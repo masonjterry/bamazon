@@ -102,15 +102,13 @@ function addInventory() {
         name: "amount"
       }
     ]).then(function(ans) {
-      console.log(ans.productID);
-      console.log(ans.amount);
         let stock = parseInt(data[ans.productID - 1].stock_quantity) + parseInt(ans.amount);
         connection.query("UPDATE products SET stock_quantity = ? WHERE id = ?",
         //stock += ans.amount;
         [stock, ans.productID],
       function(err, data) {
         console.log("Stock Added!");
-        menuOptions();
+        moreWork();
       });
     });
   });
@@ -123,5 +121,34 @@ function addProduct() {
   // what is the department_name
   // what is the price
   // how many items do you want to add
-  menuOptions();
+  inquirer.prompt([
+    {
+      message: "What is the name of the product you would like to add?",
+      name: "product_name"
+    },
+    {
+      message: "What department would you like to put the product in?",
+      name: "department_name"
+    },
+    {
+      message: "What is the price of the product?",
+      name: "price"
+    },
+    {
+      message: "How many items would you like to put in stock?",
+      name: "stock_quantity"
+    },
+
+  ]).then(function(ans) {
+    console.log(ans.product_name);
+    console.log(ans.department_name);
+    console.log(ans.price);
+    console.log(ans.stock_quantity);
+    // connection.query("INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES ?;",
+    // [ans.product_name, ans.department_name, ans.price, ans.stock_quantity],
+    //  function(err, data) {
+    //   console.log("Product Added!");
+    //   moreWork();
+    // });
+  });
 }
