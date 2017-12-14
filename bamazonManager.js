@@ -12,7 +12,6 @@ let connection = mysql.createConnection({
 
 connection.connect(function(err) {
   if (err) throw err;
-  console.log("connected as id " + connection.threadId);
   menuOptions();
 });
 
@@ -94,7 +93,7 @@ function addInventory() {
   connection.query("SELECT stock_quantity FROM products", function(err, data) {
     inquirer.prompt([
       {
-        message: "What is the product id of the product you would like to add to?",
+        message: "What is the product ID of the product you would like to add to?",
         name: "productID"
       },
       {
