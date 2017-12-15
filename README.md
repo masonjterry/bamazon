@@ -39,3 +39,13 @@
 ### If the manager selects 'View Low Inventory' a list of all products with an inventory of less than 10 will be displayed.
 
 ![Manager Low Inventory](images/ManagerLowInventory.png)
+
+### If the manager selects 'Add to Inventory' the are prompted with a question asking what product ID they want to add to and then how much they want to add of that product.
+
+![Manager Add To Inventory](images/ManagerAddStock.png)
+
+### If the manager selects 'Add New Product' they are prompted with a question asking the name of the product they want to add. Then with a question asking what department the product will be in. Then with a question asking the price of the item. Then with a question asking the number that will be in the stock.
+
+![Manager Add Product](images/ManagerAddProduct.png)
+
+![Manager Product Added](images/ManagerAddProductEx.png)
